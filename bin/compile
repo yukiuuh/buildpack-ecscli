@@ -33,7 +33,7 @@ fi
 
 mkdir -p $BUILD_DIR/.profile.d
 cat > "$BUILD_DIR/.profile.d/ecscli.sh" <<'PROFILE'
-export PATH="$HOME/.ecscli:$PATH"
+export PATH="$INSTALL_DIR/.ecscli:$PATH"
 PROFILE
 
 

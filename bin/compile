@@ -22,7 +22,7 @@ BUILDPACK_DIR="$(dirname $(dirname $0))"
 INSTALL_DIR="/app/.ecscli"
 
 echo "-----> Installing ECS CLI"
-
+mkdir /tmp
 curl --silent --show-error -o /tmp/ecs-cli "$ECS_CLI_URL" |& indent
 mkdir $INSTALL_DIR
 mv /tmp/ecs-cli "$INSTALL_DIR/ecs-cli"

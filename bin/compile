@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir> <env-dir>
+
+set -e
+
+function indent() {
+  c='s/^/       /'
+  case $(uname) in
+    Darwin) sed -l "$c";;
+    *)      sed -u "$c";;
+  esac
+}
+
+# config
+ECS_CLI_URL="https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-linux-amd64-latest"
+
+# parse and derive params
+BUILD_DIR=$1
+CACHE_DIR=$2
+
+BUILDPACK_DIR="$(dirname $(dirname $0))"
+INSTALL_DIR="/app/.ecscli"
+
+echo "-----> Installing ECS CLI"
+
+curl --silent --show-error -o "$INSTALL_DIR/ecs-cli" 
+chmod +x "$INSTALL_DIR/ecs-cli"
+if [ "$INSTALL_DIR" != "$BUILD_DIR/.ecscli" ]; then
+  mv $INSTALL_DIR/* "$BUILD_DIR/.ecscli"
+fi
+
+mkdir -p $BUILD_DIR/.profile.d
+cat > "$BUILD_DIR/.profile.d/ecscli.sh" <<'PROFILE'
+export PATH="$HOME/.ecscli:$PATH"
+PROFILE
+
+

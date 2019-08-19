@@ -23,7 +23,7 @@ INSTALL_DIR="/app/.ecscli"
 
 echo "-----> Installing ECS CLI"
 
-curl --silent --show-error -o "$INSTALL_DIR/ecs-cli" "$ECS_CLI_URL"
+curl --silent --show-error -o "$INSTALL_DIR/ecs-cli" "$ECS_CLI_URL" |& indent
 
 chmod +x "$INSTALL_DIR/ecs-cli"
 if [ "$INSTALL_DIR" != "$BUILD_DIR/.ecscli" ]; then

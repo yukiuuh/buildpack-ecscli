@@ -19,18 +19,16 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 
 BUILDPACK_DIR="$(dirname $(dirname $0))"
-INSTALL_DIR="/app/.ecscli"
+INSTALL_DIR="~/.ecscli"
 
 echo "-----> Installing ECS CLI"
-
-curl --silent --show-error -o /tmp/ecs-cli "$ECS_CLI_URL" |& indent
-mkdir $INSTALL_DIR
-mv /tmp/ecs-cli "$INSTALL_DIR/ecs-cli"
+mkdir "$INSTALL_DIR"
+curl --silent --show-error -o ~/.ecscli/ecs-cli "$ECS_CLI_URL" |& indent
 chmod +x "$INSTALL_DIR/ecs-cli"
 
-mkdir -p $BUILD_DIR/.profile.d
+mkdir -p "$BUILD_DIR/.profile.d"
 cat > "$BUILD_DIR/.profile.d/ecscli.sh" <<'PROFILE'
-export PATH="$INSTALL_DIR/.ecscli:$PATH"
+export PATH="$HOME/.ecscli:$PATH"
 PROFILE
 
 

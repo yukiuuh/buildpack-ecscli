@@ -19,7 +19,7 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 
 BUILDPACK_DIR="$(dirname $(dirname $0))"
-INSTALL_DIR="~/.ecscli"
+INSTALL_DIR="/app/.ecscli"
 
 echo "-----> Installing ECS CLI"
 mkdir "$INSTALL_DIR"
